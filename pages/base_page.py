@@ -1,5 +1,6 @@
 import math
 import time
+import requests
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import TimeoutException
@@ -54,4 +55,13 @@ class BasePage():
             return False
 
         return True
-        
+    
+    def is_request_url(self, url):
+        try:
+            response = requests.get(url)
+            if response.status_code == 200:
+                return True
+            else:
+                return False
+        except Exception:
+            return False
